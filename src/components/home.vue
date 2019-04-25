@@ -3,11 +3,12 @@
     <div>
   <h1>我是主页，yo!</h1>
   <button type="button" @click="run()">执行run方法</button>
+  <v-life></v-life>
     </div>
 </template>
 <script>
 
-
+import life from './life.vue';
 export default {
     data:function(){
         return {
@@ -19,6 +20,9 @@ export default {
         run(){
             alert(this.msg);
         }
+    },
+    components:{
+        'v-life':life
     }
 
 }
