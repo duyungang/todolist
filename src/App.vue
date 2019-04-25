@@ -24,11 +24,23 @@
      </li>
    </ul>
    
-   
+   <v-home></v-home>
   </div>
 </template>
 
 <script>
+/* 
+1. 引入组件
+*/
+/* 
+2. 挂载组件
+*/
+/* 
+3. 在模板中使用
+*/
+
+import storage from '../model/storage.js';
+import Home from './components/home.vue';
 export default {
   data:function(){
     return {
@@ -41,6 +53,9 @@ export default {
         }
       ],
     }
+  },
+  components:{
+'v-home':Home,
   },
 
   methods:{
@@ -56,7 +71,7 @@ export default {
     removeDate:function(key)
     {
       this.list.splice(key,1);                                    //删除数组中的元素
-       localStorage.setItem('list',JSON.stringify(this.list))  ;  //删除后的数据保存到本地存储
+     storage.set('list',this.list) ;  //删除后的数据保存到本地存储
     }, 
     doadd(e)
     {                                                     //方法的定义ES6的写法，e.keyCode是获取键盘的点击类型，13是回车键
@@ -68,16 +83,15 @@ export default {
        checked:false
             })
        }
-  localStorage.setItem('list',JSON.stringify(this.list))  ;       //保存新加入的数据到本地存储
+    storage.set('list',this.list) ;     //保存新加入的数据到本地存储
     },
     savalist(){
-      localStorage.setItem('list',JSON.stringify(this.list)) ;  
+    storage.set('list',this.list) ;
     }
   }
   ,
-
   mounted(){   //生命周期函数  vue页面刷新时触发
-var list=JSON.parse(localStorage.getItem('list'));
+    var list=storage.get('list');
 if (list){       //判断是否为空
   this.list=list;
 }
